@@ -31,6 +31,16 @@
         android:id="@+id/navigation_profile"
         android:name="space.lobanovi.taskapp.ui.profile.ProfileFragment"
         android:label="@string/profile"
-        tools:layout="@layout/fragment_profile2" />
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/onBoardFragment"
+        android:name="space.lobanovi.taskapp.ui.onBoard.OnBoardFragment"
+        android:label="fragment_on_board"
+        tools:layout="@layout/fragment_on_board" />
+    <fragment
+        android:id="@+id/onBoardPageFragment"
+        android:name="space.lobanovi.taskapp.ui.onBoard.OnBoardPageFragment"
+        android:label="fragment_on_board_page"
+        tools:layout="@layout/fragment_on_board_page" />
 
 </navigation>

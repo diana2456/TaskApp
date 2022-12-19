@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:padding="75dp"
     tools:context=".ui.profile.ProfileFragment">
 
                 <androidx.cardview.widget.CardView
@@ -22,4 +22,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                 </androidx.cardview.widget.CardView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_edit"
+        android:padding="10dp"
+        android:hint="Name"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"/>
         </LinearLayout>

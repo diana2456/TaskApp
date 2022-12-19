@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import space.lobanovi.taskapp.R.id.*
 import space.lobanovi.taskapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,20 +23,30 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val navController = findNavController(nav_host_fragment_activity_main).also {
+        }
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.navigation_profile,R.id.newTaskFragment,R.id.navigation_profile)
+                navigation_home, navigation_dashboard, navigation_notifications,
+                navigation_profile,
+                newTaskFragment
+            )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+
+
         navController.addOnDestinationChangedListener{ _, destination, _ ->
-            if(destination.id == R.id.newTaskFragment){
+            if(destination.id == newTaskFragment || destination.id == R.id.onBoardFragment){
                 navView.visibility = View.GONE
             }else navView.visibility = View.VISIBLE
+            if (destination.id == onBoardFragment){
+                supportActionBar?.hide()
+            }
         }
+
     }
 }
