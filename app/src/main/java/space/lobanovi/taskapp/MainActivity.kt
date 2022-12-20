@@ -34,13 +34,14 @@ class MainActivity : AppCompatActivity() {
                 newTaskFragment
             )
         )
+        navController.navigate(onBoardFragment)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
 
 
         navController.addOnDestinationChangedListener{ _, destination, _ ->
-            if(destination.id == newTaskFragment || destination.id == R.id.onBoardFragment){
+            if(destination.id == newTaskFragment || destination.id == onBoardFragment){
                 navView.visibility = View.GONE
             }else navView.visibility = View.VISIBLE
             if (destination.id == onBoardFragment){

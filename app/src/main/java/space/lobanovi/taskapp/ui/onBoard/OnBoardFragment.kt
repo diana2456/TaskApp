@@ -33,7 +33,7 @@ class OnBoardFragment : Fragment() {
         dotsIndicator.attachTo(binding!!.vpBoard)
     }
     private fun onSkipClick(){
-        binding!!.vpBoard.setCurrentItem(initClick(-1),true)
+        binding!!.vpBoard.setCurrentItem(initClick(+2),true)
     }
     private fun onNextClick(){
            binding!!.vpBoard.setCurrentItem(initClick(+1),true)
@@ -42,7 +42,3 @@ class OnBoardFragment : Fragment() {
         return binding!!.vpBoard.currentItem +i
     }
     }
-
-
-
-

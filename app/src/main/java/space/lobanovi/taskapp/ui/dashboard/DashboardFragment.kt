@@ -21,9 +21,6 @@ class DashboardFragment : Fragment() {
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
 
-   binding.btnBoar.setOnClickListener {
-       findNavController().navigate(R.id.onBoardFragment)
-   }
         return binding.root
     }
 
