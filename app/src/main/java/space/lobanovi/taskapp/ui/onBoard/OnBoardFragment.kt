@@ -12,33 +12,34 @@ import space.lobanovi.taskapp.databinding.FragmentOnBoardBinding
 
 class OnBoardFragment : Fragment() {
 
-    private var binding: FragmentOnBoardBinding? = null
+    private var _binding: FragmentOnBoardBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentOnBoardBinding.inflate(LayoutInflater.from(context),container,false)
-        return binding!!.root
+        _binding = FragmentOnBoardBinding.inflate(LayoutInflater.from(context),container,false)
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
             val adapter = BoardAdapter(childFragmentManager,this::onSkipClick,this::onNextClick)
-        adapter.also { it.also { binding!!.vpBoard.adapter = it } }
+        adapter.also { it.also { binding.vpBoard.adapter = it } }
 
-        val dotsIndicator : DotsIndicator = binding!!.dotsIndicator
-        dotsIndicator.attachTo(binding!!.vpBoard)
+        val dotsIndicator : DotsIndicator = binding.dotsIndicator
+        dotsIndicator.attachTo(binding.vpBoard)
     }
     private fun onSkipClick(){
-        binding!!.vpBoard.setCurrentItem(initClick(+2),true)
+        binding.vpBoard.currentItem = 2
     }
     private fun onNextClick(){
-           binding!!.vpBoard.setCurrentItem(initClick(+1),true)
+           binding.vpBoard.setCurrentItem((+1).initClick(),true)
     }
-    private fun initClick(i:Int): Int {
-        return binding!!.vpBoard.currentItem +i
+    private fun Int.initClick(): Int {
+        return binding.vpBoard.currentItem + this
     }
-    }
+}
