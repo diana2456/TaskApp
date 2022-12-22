@@ -2,6 +2,7 @@ package space.lobanovi.taskapp.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import space.lobanovi.taskapp.databinding.TaskItemBinding
 
@@ -28,8 +29,8 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
         fun bind(taskModel: TaskModel) {
             binding.tvTitle.text = taskModel.title
             binding.tvDesc.text = taskModel.description
+            binding.image.setImageURI(taskModel.image.toUri())
+            binding.data.text = taskModel.data
         }
-
     }
-
 }

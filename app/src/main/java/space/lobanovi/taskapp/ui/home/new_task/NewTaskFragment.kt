@@ -1,26 +1,35 @@
 package space.lobanovi.taskapp.ui.home.new_task
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
-import space.lobanovi.taskapp.R
 import space.lobanovi.taskapp.databinding.FragmentNewTaskBinding
+import space.lobanovi.taskapp.ui.home.TaskModel
 
 class NewTaskFragment : Fragment() {
     private lateinit var binding: FragmentNewTaskBinding
+    var imgUri : String = ""
+
+    private var mGetContent = this.registerForActivityResult<String, Uri>(
+        ActivityResultContracts.GetContent()
+    ){ uri ->
+        binding.imageNewTask.setImageURI(uri)
+        imgUri = uri.toString()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentNewTaskBinding.inflate(LayoutInflater.from(context),container,false)
 
-        initViews()
         initListeners()
         return binding.root
     }
@@ -29,12 +38,12 @@ class NewTaskFragment : Fragment() {
             setFragmentResult(
                 "new_task",
                 bundleOf(
-                    "title" to binding.etTitle.text.toString(),
-                    "desc" to binding.etDesc.text.toString()))
+                   "data" to TaskModel(imgUri,binding.etTitle.text.toString(),binding.etDesc.text.toString(),binding.etData.text.toString())))
+
             findNavController().navigateUp()
         }
-    }
-    private fun initViews() {
-
+        binding.imageNewTask.setOnClickListener{
+            mGetContent.launch("image/*")
+        }
     }
 }

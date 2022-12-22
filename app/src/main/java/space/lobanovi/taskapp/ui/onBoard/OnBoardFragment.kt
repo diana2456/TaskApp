@@ -24,14 +24,12 @@ class OnBoardFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
             val adapter = BoardAdapter(childFragmentManager,this::onSkipClick,this::onNextClick)
         adapter.also { it.also { binding.vpBoard.adapter = it } }
 
-        val dotsIndicator : DotsIndicator = binding.dotsIndicator
-        dotsIndicator.attachTo(binding.vpBoard)
+        binding.dotsIndicator.attachTo(binding.vpBoard)
     }
     private fun onSkipClick(){
         binding.vpBoard.currentItem = 2

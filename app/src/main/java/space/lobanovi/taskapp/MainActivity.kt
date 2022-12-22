@@ -10,6 +10,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import space.lobanovi.taskapp.R.id.*
 import space.lobanovi.taskapp.databinding.ActivityMainBinding
+import space.lobanovi.taskapp.ui.home.HomeFragment
+import space.lobanovi.taskapp.ui.onBoard.OnBoardFragment
+import space.lobanovi.taskapp.utils.Preferences
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,7 +37,10 @@ class MainActivity : AppCompatActivity() {
                 newTaskFragment
             )
         )
-        navController.navigate(onBoardFragment)
+        if(Preferences(applicationContext).isBoardingShowed())
+            navController.navigate(navigation_home)
+        else navController.navigate(onBoardFragment)
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
