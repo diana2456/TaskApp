@@ -3,8 +3,6 @@ package space.lobanovi.taskapp.utils
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import java.lang.reflect.Array.set
-import java.nio.file.Paths.get
 
 
 class Preferences(private val context: Context) {
@@ -19,11 +17,11 @@ class Preferences(private val context: Context) {
         sharedPref.edit().putBoolean("board",isSnow).apply()
     }
     fun setProfile(isSnow: String) {
-        sharedPref.edit().putString("image",isSnow).apply()
+        sharedPref.edit().putString("image", isSnow).apply()
     }
 
-    fun isProfile(image:String){
-      sharedPref.getString("image",image)
+    fun isProfile():String{
+     return sharedPref.getString("image","").toString()
     }
 
 

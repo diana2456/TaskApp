@@ -9,21 +9,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import space.lobanovi.taskapp.R
 import space.lobanovi.taskapp.databinding.FragmentProfileBinding
 import space.lobanovi.taskapp.utils.Preferences
 
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(){
+lateinit var preferences: Preferences
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private var imgUri: String = ""
+
 
     private var mGetContent = this.registerForActivityResult<String, Uri>(
         ActivityResultContracts.GetContent()
     ) { uri ->
-        binding.imageView.setImageURI(uri)
-        imgUri = uri.toString()
+        preferences.setProfile(uri.toString())
+       Glide.with(requireContext()).load(uri).circleCrop().placeholder(R.drawable.b).into(binding.imageView)
     }
 
     override fun onCreateView(
@@ -31,9 +34,11 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        preferences = Preferences(requireContext())
 
         _binding = FragmentProfileBinding.inflate(LayoutInflater.from(context), container, false)
         imageChooser()
+     Glide.with(requireContext()).load(preferences.isProfile()).circleCrop().placeholder(R.drawable.b).into(binding.imageView)
         return binding.root
     }
 
@@ -42,10 +47,7 @@ class ProfileFragment : Fragment() {
         val sh: SharedPreferences = this.requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
         val s1 = sh.getString("name", "")
         binding.editName.setText(s1)
-            binding.btn.setOnClickListener {
-              Preferences(requireContext()).isProfile(imgUri)
-                Preferences(requireContext()).setProfile(imgUri)
-        }
+
     }
 
     override fun onPause() {
@@ -54,10 +56,7 @@ class ProfileFragment : Fragment() {
         val myEdit = sharedPreferences.edit()
         myEdit.putString("name", binding.editName.text.toString())
         myEdit.apply()
-            binding.btn.setOnClickListener {
-                Preferences(requireContext()).isProfile(imgUri)
-                Preferences(requireContext()).setProfile(imgUri)
-        }
+
     }
 
     private fun imageChooser() {
