@@ -2,16 +2,14 @@ package space.lobanovi.taskapp
 
 import android.os.Bundle
 import android.view.View
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import space.lobanovi.taskapp.R.id.*
 import space.lobanovi.taskapp.databinding.ActivityMainBinding
-import space.lobanovi.taskapp.ui.home.HomeFragment
-import space.lobanovi.taskapp.ui.onBoard.OnBoardFragment
 import space.lobanovi.taskapp.utils.Preferences
 
 class MainActivity : AppCompatActivity() {

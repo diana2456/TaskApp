@@ -2,18 +2,17 @@ package space.lobanovi.taskapp.ui.home.new_task
 
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import space.lobanovi.taskapp.App
 import space.lobanovi.taskapp.databinding.FragmentNewTaskBinding
 import space.lobanovi.taskapp.ui.home.TaskModel
 
-class NewTaskFragment : Fragment() {
+class NewTaskFragment : Fragment(){
     private lateinit var binding: FragmentNewTaskBinding
     var imgUri : String = ""
 
@@ -21,7 +20,7 @@ class NewTaskFragment : Fragment() {
         ActivityResultContracts.GetContent()
     ){ uri ->
         binding.imageNewTask.setImageURI(uri)
-        imgUri = uri.toString()
+        this.imgUri = uri.toString()
     }
 
     override fun onCreateView(
@@ -35,11 +34,13 @@ class NewTaskFragment : Fragment() {
     }
     private fun initListeners() {
         binding.btnSave.setOnClickListener {
-            setFragmentResult(
-                "new_task",
-                bundleOf(
-                   "data" to TaskModel(imgUri,binding.etTitle.text.toString(),binding.etDesc.text.toString(),binding.etData.text.toString())))
-
+            App.db.dao().insert(TaskModel(
+               image =  imgUri,
+               title =    binding.etTitle.text.toString(),
+               description = binding.etDesc.text.toString(),
+                data =  binding.etData.text.toString()
+            )
+            )
             findNavController().navigateUp()
         }
         binding.imageNewTask.setOnClickListener{
