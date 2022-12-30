@@ -1,4 +1,3 @@
-@file:Suppress("AndroidUnresolvedRoomSqlReference")
 
 package space.lobanovi.taskapp.data.local.room
 
@@ -13,15 +12,15 @@ interface TaskDao {
     @Insert
     fun insert(task:TaskModel)
 
- @Query("SELECT * FROM TaskModel ORDER BY title DESC")
+ @Query("SELECT * FROM TaskModel")
  fun getAllTask():List<TaskModel>
 
     @Delete
     fun deleteTask(task: TaskModel)
 
-    @Query("SELECT * FROM TaskModel ORDER BY title Asc")
-    fun sort():List<TaskModel>
+    @Query("SELECT * FROM TaskModel ORDER BY id DESC")
+    fun getListByDate():List<TaskModel>
 
-    @Query("SELECT * FROM TaskModel ORDER BY title,description,data Asc")
-    fun everybodySort():List<TaskModel>
+    @Query("SELECT * FROM TaskModel ORDER BY title ASC")
+    fun getListByAlphabet():List<TaskModel>
 }

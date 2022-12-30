@@ -1,6 +1,6 @@
 package space.lobanovi.taskapp.ui.home
 import android.app.AlertDialog
-import android.content.DialogInterface
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -29,9 +29,8 @@ class TaskAdapter() : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(taskList[position])
+        holder.itemView.setBackgroundColor(Color.parseColor(mColors[position % 2]))
     }
-
-
     override fun getItemCount(): Int = taskList.size
 
     inner class ViewHolder(private val binding: TaskItemBinding) :
@@ -42,28 +41,23 @@ class TaskAdapter() : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
             binding.image.loadImage(taskModel.image)
             binding.data.text = taskModel.data
             itemView.setOnLongClickListener {
-                val option = arrayOf("Нет", "Да")
-                val alert = AlertDialog.Builder(itemView.context)
-                alert.setTitle("Вы точно хотите удалить?").setItems(option,
-                    DialogInterface.OnClickListener { dialogInterface, i ->
-                    if (i==0){
-                    }else if(i==1){
-                        deleteTask(adapterPosition)
-                        val  apply = apply {
-                            val item = this@TaskAdapter.taskList[position]
-                            val remove = (taskList as MutableList<TaskModel>).remove(item)
-                            notifyItemChanged(position)
-                            App.db.dao().deleteTask(item)
-                        }
+                val builder = AlertDialog.Builder(itemView.context)
+                with(builder){
+                    setTitle("Вы точно хотите удалить ${taskModel.title}")
+                    setPositiveButton("Да") { o1, o2 ->
+                        App.db.dao().deleteTask(taskModel)
+                        taskList.clear()
+                        taskList.addAll(App.db.dao().getAllTask())
+                        notifyDataSetChanged()
                     }
-                }).show()
+                    setNeutralButton("Нет"){o1,o2 ->
+                        o1.dismiss()
+                    }
+                }.show()
                 return@setOnLongClickListener true
             }
         }
     }
-    private fun deleteTask(i:Int) {
-         i!=1
-        taskList.removeAt(i)
-        notifyDataSetChanged()
-    }
+
+    var mColors = arrayOf("#FFFFFFFF","#FF464242")
 }

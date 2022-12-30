@@ -72,7 +72,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberSigned"
+            android:inputType="textPhonetic"
             android:id="@+id/et_data"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,5 +87,6 @@
         android:textStyle="bold"
         android:textAllCaps="false"
         android:textSize="20sp"
+        app:cornerRadius="10dp"
         android:paddingVertical="12dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

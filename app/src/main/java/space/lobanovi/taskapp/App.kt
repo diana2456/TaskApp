@@ -5,9 +5,6 @@ import androidx.room.Room
 import space.lobanovi.taskapp.data.local.room.TaskDatabase
 import space.lobanovi.taskapp.ui.home.TaskModel
 
-
-
-
 class App : Application() {
     override fun onCreate() {
        super.onCreate()

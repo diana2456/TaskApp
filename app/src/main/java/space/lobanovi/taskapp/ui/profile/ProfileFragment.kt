@@ -14,7 +14,6 @@ import space.lobanovi.taskapp.R
 import space.lobanovi.taskapp.databinding.FragmentProfileBinding
 import space.lobanovi.taskapp.utils.Preferences
 
-
 class ProfileFragment : Fragment(){
 lateinit var preferences: Preferences
 
@@ -65,5 +64,3 @@ lateinit var preferences: Preferences
         }
     }
 }
-
-
