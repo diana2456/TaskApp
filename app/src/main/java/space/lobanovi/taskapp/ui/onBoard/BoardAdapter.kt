@@ -1,3 +1,4 @@
+@file:Suppress("DEPRECATION")
 
 package space.lobanovi.taskapp.ui.onBoard
 
@@ -6,12 +7,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import space.lobanovi.taskapp.R
-
+import space.lobanovi.taskapp.ui.onBoard.OnBoardPageFragment.Companion.ON_BOARD
 
 class BoardAdapter(fm: FragmentManager,
-                   var listenerSkip: () -> Unit,
-                   var listenerNext: () -> Unit,
-   ): FragmentStatePagerAdapter(fm) {
+                private var listenerSkip: () -> Unit,
+                private var listenerNext: () -> Unit,
+): FragmentStatePagerAdapter(fm) {
 
     private val  listBoarding = arrayOf(
         BoardModel(
@@ -37,10 +38,11 @@ class BoardAdapter(fm: FragmentManager,
     override fun getCount(): Int = listBoarding.size
 
     override fun getItem(position: Int): Fragment {
-        val data = bundleOf("onBoard" to listBoarding[position])
+        val data = bundleOf(ON_BOARD to listBoarding[position])
         val fragment = OnBoardPageFragment(listenerSkip,listenerNext)
         fragment.arguments = data
         return fragment
 
     }
 }
+

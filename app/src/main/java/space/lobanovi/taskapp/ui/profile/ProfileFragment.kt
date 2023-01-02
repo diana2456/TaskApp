@@ -9,13 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import space.lobanovi.taskapp.R
 import space.lobanovi.taskapp.databinding.FragmentProfileBinding
+import space.lobanovi.taskapp.extenssion.loadImage
 import space.lobanovi.taskapp.utils.Preferences
 
 class ProfileFragment : Fragment(){
-lateinit var preferences: Preferences
+    lateinit var preferences: Preferences
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
@@ -25,7 +24,8 @@ lateinit var preferences: Preferences
         ActivityResultContracts.GetContent()
     ) { uri ->
         preferences.setProfile(uri.toString())
-       Glide.with(requireContext()).load(uri).circleCrop().placeholder(R.drawable.b).into(binding.imageView)
+        binding.imageView.loadImage(uri.toString())
+      // Glide.with(requireContext()).load(uri).circleCrop().placeholder(R.drawable.b).into(binding.imageView)
     }
 
     override fun onCreateView(
@@ -37,7 +37,8 @@ lateinit var preferences: Preferences
 
         _binding = FragmentProfileBinding.inflate(LayoutInflater.from(context), container, false)
         imageChooser()
-     Glide.with(requireContext()).load(preferences.isProfile()).circleCrop().placeholder(R.drawable.b).into(binding.imageView)
+        binding.imageView.loadImage(preferences.isProfile())
+   //  Glide.with(requireContext()).load(preferences.isProfile()).circleCrop().placeholder(R.drawable.b).into(binding.imageView)
         return binding.root
     }
 

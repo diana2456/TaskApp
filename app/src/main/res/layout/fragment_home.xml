@@ -27,7 +27,7 @@
      android:layout_marginBottom="32dp"
      android:backgroundTint="@color/main_color"
      app:cornerRadius="15dp"
-     app:icon="@drawable/iconly"
+     app:icon="@drawable/icons"
      android:padding="21dp"
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent" />

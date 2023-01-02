@@ -68,4 +68,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx: $lifecycle_extension_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
 
+
+    //Lotti Animation
+     def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }

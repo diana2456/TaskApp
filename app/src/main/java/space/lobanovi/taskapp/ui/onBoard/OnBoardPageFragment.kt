@@ -11,8 +11,8 @@ import space.lobanovi.taskapp.R
 import space.lobanovi.taskapp.databinding.FragmentOnBoardPageBinding
 import space.lobanovi.taskapp.utils.Preferences
 
-class OnBoardPageFragment(var listenerSkip:() -> Unit,
-                          var listenerNext:() -> Unit  ) : Fragment() {
+class OnBoardPageFragment(private var listenerSkip:() -> Unit,
+                          private var listenerNext:() -> Unit  ) : Fragment() {
 
     private var _binding: FragmentOnBoardPageBinding? = null
     private val binding get() = _binding!!
@@ -32,12 +32,12 @@ class OnBoardPageFragment(var listenerSkip:() -> Unit,
     }
     private fun initViews() {
         arguments.let {
-            val data = it?.getSerializable("onBoard") as BoardModel
+            val data = it?.getSerializable(ON_BOARD) as BoardModel
             binding.tvTitleBoard.text = data.title
             binding.tvDescBoard.text = data.description
             data.img.let { it1 ->
                 if (it1 != null) {
-                    binding.imageBoard.setImageResource(it1)
+                    binding.imageBoard.setImageResource(/* resId = */ it1)
                 }
             }
             binding.btnSkip.isVisible = data.isLast == false
@@ -59,5 +59,8 @@ class OnBoardPageFragment(var listenerSkip:() -> Unit,
            findNavController().navigate(R.id.navigation_home)
             Preferences(requireContext()).setBoardingShowed(true)
         }
+    }
+    companion object{
+        const val ON_BOARD = "onBoard"
     }
 }

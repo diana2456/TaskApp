@@ -42,5 +42,10 @@
         android:name="space.lobanovi.taskapp.ui.onBoard.OnBoardPageFragment"
         android:label="fragment_on_board_page"
         tools:layout="@layout/fragment_on_board_page" />
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="space.lobanovi.taskapp.auth.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" />
 
 </navigation>

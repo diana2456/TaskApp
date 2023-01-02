@@ -23,8 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-
-        val navController = findNavController(nav_host_fragment_activity_main).also {
+        val navController = findNavController(nav_host_fragment_activity_main).apply {
         }
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -32,21 +31,25 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 navigation_home, navigation_dashboard, navigation_notifications,
                 navigation_profile,
-                newTaskFragment
+                newTaskFragment,
+                authFragment
             )
         )
+              navController.navigate(authFragment)
+
         if(Preferences(applicationContext).isBoardingShowed())
             navController.navigate(navigation_home)
         else navController.navigate(onBoardFragment)
 
+        val list = setOf(newTaskFragment, onBoardFragment,authFragment)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{ _, destination, _ ->
-            if(destination.id == newTaskFragment || destination.id == onBoardFragment){
+            if(list.contains(destination.id)){
                 navView.visibility = View.GONE
             }else navView.visibility = View.VISIBLE
-            if (destination.id == onBoardFragment){
+            if (list.contains(destination.id)){
                 supportActionBar?.hide()
             }
         }

@@ -8,5 +8,4 @@ import space.lobanovi.taskapp.R
 
 fun View.loadImage(url: String){
         Glide.with(this).load(url).placeholder(R.drawable.b).circleCrop().into(this as ImageView)
-
     }
